@@ -6,6 +6,8 @@ function Header() {
             <Link to="/">Accueil</Link>
             <br/>
             <Link to="/survey/1">Questionnaire</Link>
+            <br/>
+            <Link to="/freelances">Profils</Link>
         </nav>
     )
 }
