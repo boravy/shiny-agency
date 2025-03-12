@@ -10,7 +10,6 @@ function Survey() {
       <h1>Questionnaire 🧮</h1>
       <h2>Question {questionNumber}</h2>
       <Link to={`/survey/${prevQuestionNumber}`}>Précédent</Link>
-      <br />
       {questionNumberInt === 10 ? (
         <Link to="/results">Résultats</Link>
       ) : (
