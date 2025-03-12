@@ -14,6 +14,9 @@ const GlobalStyle = createGlobalStyle`
     * {
       font-family: 'Trebuchet MS', Helvetica, sans-serif;
     }
+    body {
+      margin: 0;
+    }
 `
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
