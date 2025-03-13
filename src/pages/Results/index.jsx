@@ -52,7 +52,14 @@ const LoaderWrapper = styled.div`
   justify-content: center;
 `
 
-function formatFetchParams(answers) {
+export function formatJobList(title, listLength, index) {
+  if (index === listLength - 1) {
+      return title
+  }
+  return `${title},`
+}
+
+export function formatQueryParams(answers) {
   const answerNumbers = Object.keys(answers)
 
   return answerNumbers.reduce((previousParams, answerNumber, index) => {
@@ -65,11 +72,9 @@ function formatFetchParams(answers) {
 function Results() {
   const { theme } = useTheme()
   const { answers } = useContext(SurveyContext)
-  const fetchParams = formatFetchParams(answers)
+  const queryParams = formatQueryParams(answers)
 
-  const { data, isLoading, error } = useFetch(
-    `http://localhost:8000/results?${fetchParams}`
-  )
+  const { data, isLoading, error } = useFetch(`http://localhost:8000/results?${queryParams}`)
 
   if (error) {
     return <span>Il y a un problème</span>
@@ -85,17 +90,16 @@ function Results() {
     <ResultsContainer theme={theme}>
       <ResultsTitle theme={theme}>
         Les compétences dont vous avez besoin :
-        {resultsData &&
-          resultsData.map((result, index) => (
+    {resultsData &&
+        resultsData.map((result, index) => (
             <JobTitle
-              key={`result-title-${index}-${result.title}`}
-              theme={theme}
+                key={`result-title-${index}-${result.title}`}
+                theme={theme}
             >
-              {result.title}
-              {index === resultsData.length - 1 ? '' : ','}
+                { formatJobList(result.title, resultsData.length, index) }
             </JobTitle>
-          ))}
-      </ResultsTitle>
+    ))}
+</ResultsTitle>
       <StyledLink $isFullLink to="/freelances">
         Découvrez nos profils
       </StyledLink>
